@@ -36,12 +36,12 @@
         plate.onload = function() {
             img.onload = function() {
 
-                ctx.drawImage(plate, 405, 315);
+                ctx.drawImage(img, 0, 0);
                 ctx.strokeStyle = "#F00";
                 ctx.textAlign = 'center';
                 ctx.font = "bold 10pt Arial";
                 ctx.fillText(where, 443, 326);
-                ctx.drawImage(img, 0, 0);
+                ctx.drawImage(plate, 396, 303);
 
                 function downloadCanvas(link, canvasId, filename) {
                     link.href = document.getElementById(canvasId).toDataURL();
@@ -60,8 +60,8 @@
 
             }
         }
-        plate.src = "plate.jpg";
-        img.src = "Avto.png";
+        plate.src = "plate.png";
+        img.src = "avto.jpg";
 	}
     </script>
 
