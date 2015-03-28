@@ -1,4 +1,5 @@
-﻿<!doctype html>
+
+<!doctype html>
 <html>
 
 <head>
@@ -17,58 +18,64 @@
 </head>
 
 <body id='body'>
-<script>
-	function yeah()
-	{	
-	var where=document.getElementById('whereId').value;
-	document.getElementById('body').innerHTML="<canvas width='960' height='540' id='canv'>Обнови браузер, мразь</canvas><p><a id='download'>Даунлоад имедж</a></p>"
-        var canv = document.getElementById("canv");
-        var ctx = canv.getContext('2d');
-        ctx.fillStyle = "#6E6D69";
-        ctx.strokeStyle = "#F00";
-        ctx.textAlign = 'center';
-        ctx.font = "20pt Courier";
-        ctx.fillText("ща все будет", 960/2, 540/2);
-        var img = new Image;
+    <script>
+        function yeah() {
+            var where = document.getElementById('whereId').value;
+            document.getElementById('body').innerHTML = "<canvas width='960' height='540' id='canv'>Обнови браузер, мразь</canvas><p><a id='download'>Даунлоад имедж</a></p>"
+            var canv = document.getElementById("canv");
+            var ctx = canv.getContext('2d');
+            ctx.fillStyle = "#6E6D69";
+            ctx.strokeStyle = "#F00";
+            ctx.textAlign = 'center';
+            ctx.font = "20pt Courier";
+            ctx.fillText("ща все будет", 960 / 2, 540 / 2);
+            var img = new Image;
 
-        var plate = new Image;
+            var plate = new Image;
 
-        plate.onload = function() {
-            img.onload = function() {
+            
+            function onload(){
+                    if(!img.complete || !plate.complete)
+                    {
+                        return;
+                    }
+                    ctx.drawImage(img, 0, 0);
+                    ctx.strokeStyle = "#F00";
+                    ctx.textAlign = 'center';
+                    ctx.font = "bold 10pt Arial";
+                    ctx.fillText(where, 443, 326);
+                    ctx.drawImage(plate, 396, 303);
 
-                ctx.drawImage(img, 0, 0);
-                ctx.strokeStyle = "#F00";
-                ctx.textAlign = 'center';
-                ctx.font = "bold 10pt Arial";
-                ctx.fillText(where, 443, 326);
-                ctx.drawImage(plate, 396, 303);
+                    function downloadCanvas(link, canvasId, filename) {
+                        link.href = document.getElementById(canvasId).toDataURL();
+                        link.download = filename;
+                    }
+                    document.getElementById('download').addEventListener('click', function() {
+                        downloadCanvas(this, 'canv', 'avtobus.png');
+                    }, false);
+                    var el = document.getElementById('body');
+                    var disp = el.style.display;
+                    el.style.display = 'none';
+                    setTimeout(function() {
+                        el.style.display = disp;
 
-                function downloadCanvas(link, canvasId, filename) {
-                    link.href = document.getElementById(canvasId).toDataURL();
-                    link.download = filename;
+                    }, 20);
+
                 }
-                document.getElementById('download').addEventListener('click', function() {
-                    downloadCanvas(this, 'canv', 'test.png');
-                }, false);
-                var el = document.getElementById('body');
-                var disp = el.style.display;
-                el.style.display = 'none';
-                setTimeout(function() {
-                    el.style.display = disp;
+            plate.onload = onload;
+                img.onload = onload;
 
-                }, 20);
-
-            }
+            plate.src = "plate.png";
+            img.src = "avto.jpg";
         }
-        plate.src = "plate.png";
-        img.src = "avto.jpg";
-	}
     </script>
 
-Куда едем: <input type="text" id="whereId" name="fname" value="никуда">
-<button onclick="yeah()">Поехали.</button>
-    
-    
+    Куда едем:
+    <input type="text" id="whereId" name="fname" value="никуда">
+    <button onclick="yeah()">Поехали.</button>
+
+
 </body>
 
 </html>
+﻿
