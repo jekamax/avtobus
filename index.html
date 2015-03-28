@@ -33,12 +33,13 @@
 
             var plate = new Image;
 
-            
+            var alreadyDrawn=false;
             function onload(){
-                    if(!img.complete || !plate.complete)
+                    if(!img.complete || !plate.complete || alreadyDrawn)
                     {
                         return;
                     }
+                    alreadyDrawn=true;
                     ctx.drawImage(img, 0, 0);
                     ctx.strokeStyle = "#F00";
                     ctx.textAlign = 'center';
